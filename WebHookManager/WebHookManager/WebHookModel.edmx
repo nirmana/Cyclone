@@ -1,0 +1,272 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="dbd63c48f65aad4276b507a55c00bad8ffModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="webHook">
+          <Key>
+            <PropertyRef Name="webHookRefId" />
+          </Key>
+          <Property Name="webHookRefId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="before" Type="nvarchar" MaxLength="100" />
+          <Property Name="after" Type="nvarchar" MaxLength="100" />
+          <Property Name="headCommitId" Type="nvarchar" MaxLength="100" />
+          <Property Name="headCommitUrl" Type="nvarchar(max)" />
+          <Property Name="headCommitMessage" Type="nvarchar(max)" />
+          <Property Name="headCommitAdded" Type="nvarchar(max)" />
+          <Property Name="headCommitRemoved" Type="nvarchar(max)" />
+          <Property Name="headCommitModified" Type="nvarchar(max)" />
+          <Property Name="repositoryId" Type="nvarchar(max)" />
+          <Property Name="repositoryUrl" Type="nvarchar(max)" />
+          <Property Name="entryTime" Type="datetime" />
+          <Property Name="isSync" Type="bit" />
+          <Property Name="TimeSync" Type="datetime" />
+        </EntityType>
+        <EntityType Name="webHookCommits">
+          <Key>
+            <PropertyRef Name="icommitId" />
+          </Key>
+          <Property Name="icommitId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="webHookId" Type="bigint" />
+          <Property Name="gitCommitId" Type="nvarchar(max)" />
+          <Property Name="message" Type="nvarchar(max)" />
+          <Property Name="timestamp" Type="nvarchar(max)" />
+          <Property Name="url" Type="nvarchar(max)" />
+          <Property Name="authorName" Type="nvarchar(max)" />
+          <Property Name="authorUserName" Type="nvarchar(max)" />
+          <Property Name="committerName" Type="nvarchar(max)" />
+          <Property Name="committerUserName" Type="nvarchar(max)" />
+          <Property Name="added" Type="nvarchar(max)" />
+          <Property Name="removed" Type="nvarchar(max)" />
+          <Property Name="modified" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="webHookFiles">
+          <Key>
+            <PropertyRef Name="fileId" />
+          </Key>
+          <Property Name="fileId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="webHookId" Type="bigint" />
+          <Property Name="fileName" Type="nvarchar(max)" />
+          <Property Name="Status" Type="nvarchar(max)" />
+          <Property Name="additions" Type="nvarchar(max)" />
+          <Property Name="deletions" Type="nvarchar(max)" />
+          <Property Name="changes" Type="nvarchar(max)" />
+          <Property Name="patch" Type="nvarchar(max)" />
+        </EntityType>
+        <Association Name="FK_webHookCommits_webHook">
+          <End Role="webHook" Type="Self.webHook" Multiplicity="0..1" />
+          <End Role="webHookCommits" Type="Self.webHookCommits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="webHook">
+              <PropertyRef Name="webHookRefId" />
+            </Principal>
+            <Dependent Role="webHookCommits">
+              <PropertyRef Name="webHookId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_webHookFiles_webHook">
+          <End Role="webHook" Type="Self.webHook" Multiplicity="0..1" />
+          <End Role="webHookFiles" Type="Self.webHookFiles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="webHook">
+              <PropertyRef Name="webHookRefId" />
+            </Principal>
+            <Dependent Role="webHookFiles">
+              <PropertyRef Name="webHookId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dbd63c48f65aad4276b507a55c00bad8ffModelStoreContainer">
+          <EntitySet Name="webHook" EntityType="Self.webHook" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="webHookCommits" EntityType="Self.webHookCommits" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="webHookFiles" EntityType="Self.webHookFiles" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_webHookCommits_webHook" Association="Self.FK_webHookCommits_webHook">
+            <End Role="webHook" EntitySet="webHook" />
+            <End Role="webHookCommits" EntitySet="webHookCommits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_webHookFiles_webHook" Association="Self.FK_webHookFiles_webHook">
+            <End Role="webHook" EntitySet="webHook" />
+            <End Role="webHookFiles" EntitySet="webHookFiles" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="dbd63c48f65aad4276b507a55c00bad8ffModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="dbd63c48f65aad4276b507a55c00bad8ffEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="webHooks" EntityType="dbd63c48f65aad4276b507a55c00bad8ffModel.webHook" />
+          <EntitySet Name="webHookCommits" EntityType="dbd63c48f65aad4276b507a55c00bad8ffModel.webHookCommit" />
+          <EntitySet Name="webHookFiles" EntityType="dbd63c48f65aad4276b507a55c00bad8ffModel.webHookFile" />
+          <AssociationSet Name="FK_webHookCommits_webHook" Association="dbd63c48f65aad4276b507a55c00bad8ffModel.FK_webHookCommits_webHook">
+            <End Role="webHook" EntitySet="webHooks" />
+            <End Role="webHookCommit" EntitySet="webHookCommits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_webHookFiles_webHook" Association="dbd63c48f65aad4276b507a55c00bad8ffModel.FK_webHookFiles_webHook">
+            <End Role="webHook" EntitySet="webHooks" />
+            <End Role="webHookFile" EntitySet="webHookFiles" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="webHook">
+          <Key>
+            <PropertyRef Name="webHookRefId" />
+          </Key>
+          <Property Name="webHookRefId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="before" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="after" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="headCommitId" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="headCommitUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="headCommitMessage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="headCommitAdded" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="headCommitRemoved" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="headCommitModified" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="repositoryId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="repositoryUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="entryTime" Type="DateTime" Precision="3" />
+          <Property Name="isSync" Type="Boolean" />
+          <Property Name="TimeSync" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="webHookCommits" Relationship="dbd63c48f65aad4276b507a55c00bad8ffModel.FK_webHookCommits_webHook" FromRole="webHook" ToRole="webHookCommit" />
+          <NavigationProperty Name="webHookFiles" Relationship="dbd63c48f65aad4276b507a55c00bad8ffModel.FK_webHookFiles_webHook" FromRole="webHook" ToRole="webHookFile" />
+        </EntityType>
+        <EntityType Name="webHookCommit">
+          <Key>
+            <PropertyRef Name="icommitId" />
+          </Key>
+          <Property Name="icommitId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="webHookId" Type="Int64" />
+          <Property Name="gitCommitId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="message" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="timestamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="url" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="authorName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="authorUserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="committerName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="committerUserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="added" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="removed" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="modified" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="webHook" Relationship="dbd63c48f65aad4276b507a55c00bad8ffModel.FK_webHookCommits_webHook" FromRole="webHookCommit" ToRole="webHook" />
+        </EntityType>
+        <EntityType Name="webHookFile">
+          <Key>
+            <PropertyRef Name="fileId" />
+          </Key>
+          <Property Name="fileId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="webHookId" Type="Int64" />
+          <Property Name="fileName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="additions" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="deletions" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="changes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="patch" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="webHook" Relationship="dbd63c48f65aad4276b507a55c00bad8ffModel.FK_webHookFiles_webHook" FromRole="webHookFile" ToRole="webHook" />
+        </EntityType>
+        <Association Name="FK_webHookCommits_webHook">
+          <End Type="dbd63c48f65aad4276b507a55c00bad8ffModel.webHook" Role="webHook" Multiplicity="0..1" />
+          <End Type="dbd63c48f65aad4276b507a55c00bad8ffModel.webHookCommit" Role="webHookCommit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="webHook">
+              <PropertyRef Name="webHookRefId" />
+            </Principal>
+            <Dependent Role="webHookCommit">
+              <PropertyRef Name="webHookId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_webHookFiles_webHook">
+          <End Type="dbd63c48f65aad4276b507a55c00bad8ffModel.webHook" Role="webHook" Multiplicity="0..1" />
+          <End Type="dbd63c48f65aad4276b507a55c00bad8ffModel.webHookFile" Role="webHookFile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="webHook">
+              <PropertyRef Name="webHookRefId" />
+            </Principal>
+            <Dependent Role="webHookFile">
+              <PropertyRef Name="webHookId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="dbd63c48f65aad4276b507a55c00bad8ffModelStoreContainer" CdmEntityContainer="dbd63c48f65aad4276b507a55c00bad8ffEntities">
+          <EntitySetMapping Name="webHooks">
+            <EntityTypeMapping TypeName="dbd63c48f65aad4276b507a55c00bad8ffModel.webHook">
+              <MappingFragment StoreEntitySet="webHook">
+                <ScalarProperty Name="TimeSync" ColumnName="TimeSync" />
+                <ScalarProperty Name="isSync" ColumnName="isSync" />
+                <ScalarProperty Name="entryTime" ColumnName="entryTime" />
+                <ScalarProperty Name="repositoryUrl" ColumnName="repositoryUrl" />
+                <ScalarProperty Name="repositoryId" ColumnName="repositoryId" />
+                <ScalarProperty Name="headCommitModified" ColumnName="headCommitModified" />
+                <ScalarProperty Name="headCommitRemoved" ColumnName="headCommitRemoved" />
+                <ScalarProperty Name="headCommitAdded" ColumnName="headCommitAdded" />
+                <ScalarProperty Name="headCommitMessage" ColumnName="headCommitMessage" />
+                <ScalarProperty Name="headCommitUrl" ColumnName="headCommitUrl" />
+                <ScalarProperty Name="headCommitId" ColumnName="headCommitId" />
+                <ScalarProperty Name="after" ColumnName="after" />
+                <ScalarProperty Name="before" ColumnName="before" />
+                <ScalarProperty Name="webHookRefId" ColumnName="webHookRefId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="webHookCommits">
+            <EntityTypeMapping TypeName="dbd63c48f65aad4276b507a55c00bad8ffModel.webHookCommit">
+              <MappingFragment StoreEntitySet="webHookCommits">
+                <ScalarProperty Name="modified" ColumnName="modified" />
+                <ScalarProperty Name="removed" ColumnName="removed" />
+                <ScalarProperty Name="added" ColumnName="added" />
+                <ScalarProperty Name="committerUserName" ColumnName="committerUserName" />
+                <ScalarProperty Name="committerName" ColumnName="committerName" />
+                <ScalarProperty Name="authorUserName" ColumnName="authorUserName" />
+                <ScalarProperty Name="authorName" ColumnName="authorName" />
+                <ScalarProperty Name="url" ColumnName="url" />
+                <ScalarProperty Name="timestamp" ColumnName="timestamp" />
+                <ScalarProperty Name="message" ColumnName="message" />
+                <ScalarProperty Name="gitCommitId" ColumnName="gitCommitId" />
+                <ScalarProperty Name="webHookId" ColumnName="webHookId" />
+                <ScalarProperty Name="icommitId" ColumnName="icommitId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="webHookFiles">
+            <EntityTypeMapping TypeName="dbd63c48f65aad4276b507a55c00bad8ffModel.webHookFile">
+              <MappingFragment StoreEntitySet="webHookFiles">
+                <ScalarProperty Name="patch" ColumnName="patch" />
+                <ScalarProperty Name="changes" ColumnName="changes" />
+                <ScalarProperty Name="deletions" ColumnName="deletions" />
+                <ScalarProperty Name="additions" ColumnName="additions" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="fileName" ColumnName="fileName" />
+                <ScalarProperty Name="webHookId" ColumnName="webHookId" />
+                <ScalarProperty Name="fileId" ColumnName="fileId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

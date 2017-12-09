@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd">
+  <metadata>
+    <id>Microsoft.AspNet.WebHooks.Receivers</id>
+    <version>1.2.0-beta4</version>
+    <title>Microsoft ASP.NET WebHooks Receivers</title>
+    <authors>Microsoft</authors>
+    <owners>Microsoft</owners>
+    <licenseUrl>http://www.microsoft.com/web/webpi/eula/net_library_eula_enu.htm</licenseUrl>
+    <projectUrl>http://www.asp.net/</projectUrl>
+    <iconUrl>http://go.microsoft.com/fwlink/?LinkID=288859</iconUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <description>This package provides a uniform model for receiving WebHooks from an open-ended set of WebHook generators such as Dropbox, GitHub, Slack, and many more.</description>
+    <releaseNotes />
+    <copyright>Copyright © Microsoft Corporation</copyright>
+    <tags>Microsoft AspNet WebApi AspNetWebApi WebHooks</tags>
+    <dependencies>
+      <dependency id="Microsoft.AspNet.WebApi.Core" version="5.2.2" />
+      <dependency id="Microsoft.AspNet.WebHooks.Common" version="1.2.0-beta4" />
+    </dependencies>
+  </metadata>
+</package>

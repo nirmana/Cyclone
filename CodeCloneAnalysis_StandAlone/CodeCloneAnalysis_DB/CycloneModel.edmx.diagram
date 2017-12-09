@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="fb18e4bfbde54940a50f9465ef7236b1" Name="Diagram1">
+        <EntityTypeShape EntityType="cycloneModel.clone_class" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="cycloneModel.clone_fragment" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="cycloneModel.clones_modified_users" Width="1.5" PointX="4.75" PointY="0.75" />
+        <EntityTypeShape EntityType="cycloneModel.source" Width="1.5" PointX="0.75" PointY="4.75" />
+        <EntityTypeShape EntityType="cycloneModel.source_analyzer" Width="1.5" PointX="2.75" PointY="4.75" />
+        <EntityTypeShape EntityType="cycloneModel.source_file" Width="1.5" PointX="4.75" PointY="4.75" />
+        <EntityTypeShape EntityType="cycloneModel.time_intervals" Width="1.5" PointX="6.75" PointY="0.75" />
+        <EntityTypeShape EntityType="cycloneModel.webhook" Width="1.5" PointX="6.75" PointY="3.75" />
+        <EntityTypeShape EntityType="cycloneModel.webhook_commits" Width="1.5" PointX="8.75" PointY="0.75" />
+        <EntityTypeShape EntityType="cycloneModel.webhook_files" Width="1.5" PointX="0.75" PointY="8.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

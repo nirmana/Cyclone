@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+  $Id: intro-example-step1.cqb 34752 2011-07-12 18:02:59Z beller $
+  $Rev: 34752 $
+  @levd.rating YELLOW Rev: 11460
+-->
+<conqat xmlns="http://conqat.cs.tum.edu/ns/config">
+   <block-spec name="{blockSpecname}"><!-- Load JUnit source code -->
+      <block name="src" spec="org.conqat.engine.sourcecode.resource.TokenFileScope">
+         <include pattern="**/*.java"/>
+         <language name="JAVA"/>
+         <root dir="{rootDir}"/>
+         <project name="junit"/>
+      </block><!-- Compute lines of code -->
+      <processor class="org.conqat.engine.resource.analysis.LOCAnalyzer" name="loc-analyzer">
+         <input ref="@src.result"/>
+      </processor><!-- Write result into report: Create table layout -->
+      <processor class="org.conqat.engine.html_presentation.layouters.TableLayouter" name="loc-table">
+         <input ref="@loc-analyzer"/>
+         <info description="Lines of Code" name="LOC"/>
+      </processor><!-- Write result into report: Create html pages -->
+      <processor class="org.conqat.engine.html_presentation.HTMLPresentation" name="presentation">
+         <result ref="@java-clone-chain.html*"/>
+         <output dir="{htmlPresentationOutput}"/>
+         <project title="Tutorial - Getting started with ConQAT"/>
+         <result ref="@loc-table"/>
+      </processor>
+      <block name="java-clone-chain" spec="org.conqat.engine.code_clones.languages.java.JavaCloneChain">
+         <output dir="{xmlOutput}" reportname="clones.xml"/>
+         <info groupId="Clones"/>
+         <clone minlength="10"/>
+         <input scope="@sum-aggregator"/>
+      </block>
+      <processor class="org.conqat.engine.commons.aggregation.SumAggregator" name="sum-aggregator">
+         <read key=""/>
+         <input ref="@loc-analyzer"/>
+      </processor>
+   </block-spec>
+   <meta type="cq.edit">
+      <entries namespace="presentation">
+         <entry key="pos" value="127,431"/>
+      </entries>
+      <entries namespace="loc-table">
+         <entry key="pos" value="415,267"/>
+      </entries>
+      <entries namespace="loc-analyzer">
+         <entry key="pos" value="271,185"/>
+      </entries>
+      <entries namespace="src">
+         <entry key="pos" value="271,103"/>
+      </entries>
+      <entries namespace="java-clone-chain">
+         <entry key="pos" value="127,349"/>
+      </entries>
+      <entries namespace="sum-aggregator">
+         <entry key="pos" value="127,267"/>
+      </entries>
+   </meta>
+</conqat>

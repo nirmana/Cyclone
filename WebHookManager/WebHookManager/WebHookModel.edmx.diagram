@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="3da42c750cb64254b1053e79c0cf8d49" Name="Diagram1" ZoomLevel="64">
+        <EntityTypeShape EntityType="dbd63c48f65aad4276b507a55c00bad8ffModel.webHook" Width="1.5" PointX="0.75" PointY="2.75" />
+        <EntityTypeShape EntityType="dbd63c48f65aad4276b507a55c00bad8ffModel.webHookCommit" Width="1.5" PointX="3" PointY="4.625" />
+        <EntityTypeShape EntityType="dbd63c48f65aad4276b507a55c00bad8ffModel.webHookFile" Width="1.5" PointX="3" PointY="1.125" />
+        <AssociationConnector Association="dbd63c48f65aad4276b507a55c00bad8ffModel.FK_webHookCommits_webHook" />
+        <AssociationConnector Association="dbd63c48f65aad4276b507a55c00bad8ffModel.FK_webHookFiles_webHook" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

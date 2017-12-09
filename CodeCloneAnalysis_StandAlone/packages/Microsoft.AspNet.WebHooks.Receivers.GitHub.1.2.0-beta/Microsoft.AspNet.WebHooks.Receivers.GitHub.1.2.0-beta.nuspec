@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd">
+  <metadata>
+    <id>Microsoft.AspNet.WebHooks.Receivers.GitHub</id>
+    <version>1.2.0-beta</version>
+    <title>Microsoft ASP.NET WebHooks Receiver for GitHub</title>
+    <authors>Microsoft</authors>
+    <owners>Microsoft</owners>
+    <licenseUrl>http://www.microsoft.com/web/webpi/eula/net_library_eula_enu.htm</licenseUrl>
+    <projectUrl>http://www.asp.net/</projectUrl>
+    <iconUrl>http://go.microsoft.com/fwlink/?LinkID=288859</iconUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <description>This package provides support for receiving WebHooks from GitHub. For information about GitHub WebHooks, see "https://developer.github.com/webhooks/".</description>
+    <releaseNotes />
+    <copyright>Copyright © Microsoft Corporation</copyright>
+    <language />
+    <tags>Microsoft AspNet WebApi AspNetWebApi WebHooks GitHub</tags>
+    <dependencies>
+      <dependency id="Microsoft.AspNet.WebApi.Core" version="5.2.2" />
+      <dependency id="Microsoft.AspNet.WebHooks.Common" version="1.2.0-beta" />
+      <dependency id="Microsoft.AspNet.WebHooks.Receivers" version="1.2.0-beta" />
+    </dependencies>
+  </metadata>
+</package>

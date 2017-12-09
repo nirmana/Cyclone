@@ -1,0 +1,474 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="cycloneModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="clone_class">
+          <Key>
+            <PropertyRef Name="cloneclass_id" />
+            <PropertyRef Name="analyzer_id" />
+          </Key>
+          <Property Name="cloneclass_id" Type="varchar" MaxLength="36" Nullable="false" />
+          <Property Name="clone_lines_count" Type="int" />
+          <Property Name="clone_fragments_count" Type="int" />
+          <Property Name="source_id" Type="varchar" MaxLength="45" />
+          <Property Name="analyzer_id" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="clone_class_type" Type="varchar" MaxLength="45" />
+        </EntityType>
+        <EntityType Name="clone_fragment">
+          <Key>
+            <PropertyRef Name="clone_fragment_id" />
+            <PropertyRef Name="analyzer_id" />
+          </Key>
+          <Property Name="clone_fragment_id" Type="varchar" MaxLength="36" Nullable="false" />
+          <Property Name="source_path" Type="varchar" MaxLength="450" />
+          <Property Name="start_line" Type="int" />
+          <Property Name="end_line" Type="int" />
+          <Property Name="clone_lines_count" Type="int" />
+          <Property Name="clone_class_id" Type="varchar" MaxLength="45" />
+          <Property Name="source_file_id" Type="varchar" MaxLength="45" />
+          <Property Name="analyzer_id" Type="varchar" MaxLength="45" Nullable="false" />
+        </EntityType>
+        <EntityType Name="clones_modified_users">
+          <Key>
+            <PropertyRef Name="modification_id" />
+          </Key>
+          <Property Name="modification_id" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="analyzer_id" Type="varchar" MaxLength="100" />
+          <Property Name="source_id" Type="varchar" MaxLength="100" />
+          <Property Name="status" Type="varchar" MaxLength="100" />
+          <Property Name="user_name" Type="varchar" MaxLength="200" />
+          <Property Name="timestamp" Type="datetime" Precision="0" />
+          <Property Name="file_name" Type="varchar" MaxLength="250" />
+          <Property Name="modified_line_number" Type="int" />
+        </EntityType>
+        <EntityType Name="source">
+          <Key>
+            <PropertyRef Name="source_id" />
+          </Key>
+          <Property Name="source_id" Type="varchar" MaxLength="36" Nullable="false" />
+          <Property Name="source_name" Type="varchar" MaxLength="100" />
+          <Property Name="create_date" Type="date" />
+          <Property Name="location" Type="varchar" MaxLength="450" />
+          <Property Name="git_url" Type="varchar" MaxLength="450" />
+          <Property Name="time_intervals_id" Type="varchar" MaxLength="450" />
+        </EntityType>
+        <EntityType Name="source_analyzer">
+          <Key>
+            <PropertyRef Name="analyzer_id" />
+          </Key>
+          <Property Name="analyzer_id" Type="varchar" MaxLength="36" Nullable="false" />
+          <Property Name="processed_time" Type="datetime" Precision="0" />
+          <Property Name="source_file_count" Type="int" />
+          <Property Name="clone_classes_count" Type="int" />
+          <Property Name="clones_count" Type="int" />
+          <Property Name="source_id" Type="varchar" MaxLength="36" />
+          <Property Name="line_of_code_count" Type="int" />
+          <Property Name="source_path" Type="varchar" MaxLength="450" />
+        </EntityType>
+        <EntityType Name="source_file">
+          <Key>
+            <PropertyRef Name="file_id" />
+            <PropertyRef Name="analyzer_id" />
+          </Key>
+          <Property Name="file_id" Type="varchar" MaxLength="36" Nullable="false" />
+          <Property Name="file_path" Type="varchar" MaxLength="435" />
+          <Property Name="line_of_code" Type="int" />
+          <Property Name="source_id" Type="varchar" MaxLength="36" />
+          <Property Name="analyzer_id" Type="varchar" MaxLength="45" Nullable="false" />
+        </EntityType>
+        <EntityType Name="time_intervals">
+          <Key>
+            <PropertyRef Name="time_intervals_id" />
+          </Key>
+          <Property Name="time_intervals_id" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="hours_value" Type="mediumtext" />
+          <Property Name="display_value" Type="varchar" MaxLength="450" />
+        </EntityType>
+        <EntityType Name="webhook">
+          <Key>
+            <PropertyRef Name="unique_id" />
+          </Key>
+          <Property Name="webhook_ref_id" Type="bigint" />
+          <Property Name="head_commit_id" Type="mediumtext" />
+          <Property Name="head_commit_url" Type="mediumtext" />
+          <Property Name="head_commit_message" Type="mediumtext" />
+          <Property Name="head_commit_added" Type="mediumtext" />
+          <Property Name="head_commit_removed" Type="mediumtext" />
+          <Property Name="head_commit_modified" Type="mediumtext" />
+          <Property Name="repository_id" Type="mediumtext" />
+          <Property Name="repository_url" Type="mediumtext" />
+          <Property Name="entry_time" Type="datetime" Precision="0" />
+          <Property Name="after_id" Type="mediumtext" />
+          <Property Name="before_id" Type="mediumtext" />
+          <Property Name="source_id" Type="mediumtext" />
+          <Property Name="unique_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="webhook_commits">
+          <Key>
+            <PropertyRef Name="unique_id" />
+          </Key>
+          <Property Name="icommit_id" Type="bigint" />
+          <Property Name="webhook_ref_id" Type="bigint" />
+          <Property Name="git_commit_id" Type="mediumtext" />
+          <Property Name="message" Type="mediumtext" />
+          <Property Name="timestamp" Type="mediumtext" />
+          <Property Name="url" Type="mediumtext" />
+          <Property Name="author_name" Type="mediumtext" />
+          <Property Name="author_user_name" Type="mediumtext" />
+          <Property Name="committer_name" Type="mediumtext" />
+          <Property Name="committer_user_name" Type="mediumtext" />
+          <Property Name="added" Type="mediumtext" />
+          <Property Name="removed" Type="mediumtext" />
+          <Property Name="modified" Type="mediumtext" />
+          <Property Name="unique_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="webhook_files">
+          <Key>
+            <PropertyRef Name="unique_id" />
+          </Key>
+          <Property Name="file_id" Type="bigint" />
+          <Property Name="webhook_ref_id" Type="bigint" />
+          <Property Name="file_name" Type="mediumtext" />
+          <Property Name="status" Type="mediumtext" />
+          <Property Name="additions" Type="mediumtext" />
+          <Property Name="deletions" Type="mediumtext" />
+          <Property Name="changes" Type="mediumtext" />
+          <Property Name="patch" Type="mediumtext" />
+          <Property Name="unique_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="cycloneModelStoreContainer">
+          <EntitySet Name="clone_class" EntityType="Self.clone_class" Schema="cyclone" store:Type="Tables" />
+          <EntitySet Name="clone_fragment" EntityType="Self.clone_fragment" Schema="cyclone" store:Type="Tables" />
+          <EntitySet Name="clones_modified_users" EntityType="Self.clones_modified_users" Schema="cyclone" store:Type="Tables" />
+          <EntitySet Name="source" EntityType="Self.source" Schema="cyclone" store:Type="Tables" />
+          <EntitySet Name="source_analyzer" EntityType="Self.source_analyzer" Schema="cyclone" store:Type="Tables" />
+          <EntitySet Name="source_file" EntityType="Self.source_file" Schema="cyclone" store:Type="Tables" />
+          <EntitySet Name="time_intervals" EntityType="Self.time_intervals" Schema="cyclone" store:Type="Tables" />
+          <EntitySet Name="webhook" EntityType="Self.webhook" Schema="cyclone" store:Type="Tables" />
+          <EntitySet Name="webhook_commits" EntityType="Self.webhook_commits" Schema="cyclone" store:Type="Tables" />
+          <EntitySet Name="webhook_files" EntityType="Self.webhook_files" Schema="cyclone" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="cycloneModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="cycloneEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="clone_class" EntityType="cycloneModel.clone_class" />
+          <EntitySet Name="clone_fragment" EntityType="cycloneModel.clone_fragment" />
+          <EntitySet Name="clones_modified_users" EntityType="cycloneModel.clones_modified_users" />
+          <EntitySet Name="sources" EntityType="cycloneModel.source" />
+          <EntitySet Name="source_analyzer" EntityType="cycloneModel.source_analyzer" />
+          <EntitySet Name="source_file" EntityType="cycloneModel.source_file" />
+          <EntitySet Name="time_intervals" EntityType="cycloneModel.time_intervals" />
+          <EntitySet Name="webhooks" EntityType="cycloneModel.webhook" />
+          <EntitySet Name="webhook_commits" EntityType="cycloneModel.webhook_commits" />
+          <EntitySet Name="webhook_files" EntityType="cycloneModel.webhook_files" />
+        </EntityContainer>
+        <EntityType Name="clone_class">
+          <Key>
+            <PropertyRef Name="cloneclass_id" />
+            <PropertyRef Name="analyzer_id" />
+          </Key>
+          <Property Name="cloneclass_id" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="false" />
+          <Property Name="clone_lines_count" Type="Int32" />
+          <Property Name="clone_fragments_count" Type="Int32" />
+          <Property Name="source_id" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="analyzer_id" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="clone_class_type" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="clone_fragment">
+          <Key>
+            <PropertyRef Name="clone_fragment_id" />
+            <PropertyRef Name="analyzer_id" />
+          </Key>
+          <Property Name="clone_fragment_id" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="false" />
+          <Property Name="source_path" Type="String" MaxLength="450" FixedLength="false" Unicode="false" />
+          <Property Name="start_line" Type="Int32" />
+          <Property Name="end_line" Type="Int32" />
+          <Property Name="clone_lines_count" Type="Int32" />
+          <Property Name="clone_class_id" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="source_file_id" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="analyzer_id" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="clones_modified_users">
+          <Key>
+            <PropertyRef Name="modification_id" />
+          </Key>
+          <Property Name="modification_id" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="analyzer_id" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="source_id" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="status" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="user_name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="timestamp" Type="DateTime" />
+          <Property Name="file_name" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="modified_line_number" Type="Int32" />
+        </EntityType>
+        <EntityType Name="source">
+          <Key>
+            <PropertyRef Name="source_id" />
+          </Key>
+          <Property Name="source_id" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="false" />
+          <Property Name="source_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="create_date" Type="DateTime" />
+          <Property Name="location" Type="String" MaxLength="450" FixedLength="false" Unicode="false" />
+          <Property Name="git_url" Type="String" MaxLength="450" FixedLength="false" Unicode="false" />
+          <Property Name="time_intervals_id" Type="String" MaxLength="450" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="source_analyzer">
+          <Key>
+            <PropertyRef Name="analyzer_id" />
+          </Key>
+          <Property Name="analyzer_id" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="false" />
+          <Property Name="processed_time" Type="DateTime" />
+          <Property Name="source_file_count" Type="Int32" />
+          <Property Name="clone_classes_count" Type="Int32" />
+          <Property Name="clones_count" Type="Int32" />
+          <Property Name="source_id" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
+          <Property Name="line_of_code_count" Type="Int32" />
+          <Property Name="source_path" Type="String" MaxLength="450" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="source_file">
+          <Key>
+            <PropertyRef Name="file_id" />
+            <PropertyRef Name="analyzer_id" />
+          </Key>
+          <Property Name="file_id" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="false" />
+          <Property Name="file_path" Type="String" MaxLength="435" FixedLength="false" Unicode="false" />
+          <Property Name="line_of_code" Type="Int32" />
+          <Property Name="source_id" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
+          <Property Name="analyzer_id" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="time_intervals">
+          <Key>
+            <PropertyRef Name="time_intervals_id" />
+          </Key>
+          <Property Name="time_intervals_id" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="hours_value" Type="String" MaxLength="16777215" FixedLength="false" Unicode="false" />
+          <Property Name="display_value" Type="String" MaxLength="450" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="webhook">
+          <Key>
+            <PropertyRef Name="unique_id" />
+          </Key>
+          <Property Name="webhook_ref_id" Type="Int64" />
+          <Property Name="head_commit_id" Type="String" MaxLength="16777215" FixedLength="false" Unicode="false" />
+          <Property Name="head_commit_url" Type="String" MaxLength="16777215" FixedLength="false" Unicode="false" />
+          <Property Name="head_commit_message" Type="String" MaxLength="16777215" FixedLength="false" Unicode="false" />
+          <Property Name="head_commit_added" Type="String" MaxLength="16777215" FixedLength="false" Unicode="false" />
+          <Property Name="head_commit_removed" Type="String" MaxLength="16777215" FixedLength="false" Unicode="false" />
+          <Property Name="head_commit_modified" Type="String" MaxLength="16777215" FixedLength="false" Unicode="false" />
+          <Property Name="repository_id" Type="String" MaxLength="16777215" FixedLength="false" Unicode="false" />
+          <Property Name="repository_url" Type="String" MaxLength="16777215" FixedLength="false" Unicode="false" />
+          <Property Name="entry_time" Type="DateTime" />
+          <Property Name="after_id" Type="String" MaxLength="16777215" FixedLength="false" Unicode="false" />
+          <Property Name="before_id" Type="String" MaxLength="16777215" FixedLength="false" Unicode="false" />
+          <Property Name="source_id" Type="String" MaxLength="16777215" FixedLength="false" Unicode="false" />
+          <Property Name="unique_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="webhook_commits">
+          <Key>
+            <PropertyRef Name="unique_id" />
+          </Key>
+          <Property Name="icommit_id" Type="Int64" />
+          <Property Name="webhook_ref_id" Type="Int64" />
+          <Property Name="git_commit_id" Type="String" MaxLength="16777215" FixedLength="false" Unicode="false" />
+          <Property Name="message" Type="String" MaxLength="16777215" FixedLength="false" Unicode="false" />
+          <Property Name="timestamp" Type="String" MaxLength="16777215" FixedLength="false" Unicode="false" />
+          <Property Name="url" Type="String" MaxLength="16777215" FixedLength="false" Unicode="false" />
+          <Property Name="author_name" Type="String" MaxLength="16777215" FixedLength="false" Unicode="false" />
+          <Property Name="author_user_name" Type="String" MaxLength="16777215" FixedLength="false" Unicode="false" />
+          <Property Name="committer_name" Type="String" MaxLength="16777215" FixedLength="false" Unicode="false" />
+          <Property Name="committer_user_name" Type="String" MaxLength="16777215" FixedLength="false" Unicode="false" />
+          <Property Name="added" Type="String" MaxLength="16777215" FixedLength="false" Unicode="false" />
+          <Property Name="removed" Type="String" MaxLength="16777215" FixedLength="false" Unicode="false" />
+          <Property Name="modified" Type="String" MaxLength="16777215" FixedLength="false" Unicode="false" />
+          <Property Name="unique_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="webhook_files">
+          <Key>
+            <PropertyRef Name="unique_id" />
+          </Key>
+          <Property Name="file_id" Type="Int64" />
+          <Property Name="webhook_ref_id" Type="Int64" />
+          <Property Name="file_name" Type="String" MaxLength="16777215" FixedLength="false" Unicode="false" />
+          <Property Name="status" Type="String" MaxLength="16777215" FixedLength="false" Unicode="false" />
+          <Property Name="additions" Type="String" MaxLength="16777215" FixedLength="false" Unicode="false" />
+          <Property Name="deletions" Type="String" MaxLength="16777215" FixedLength="false" Unicode="false" />
+          <Property Name="changes" Type="String" MaxLength="16777215" FixedLength="false" Unicode="false" />
+          <Property Name="patch" Type="String" MaxLength="16777215" FixedLength="false" Unicode="false" />
+          <Property Name="unique_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="cycloneModelStoreContainer" CdmEntityContainer="cycloneEntities">
+          <EntitySetMapping Name="clone_class">
+            <EntityTypeMapping TypeName="cycloneModel.clone_class">
+              <MappingFragment StoreEntitySet="clone_class">
+                <ScalarProperty Name="clone_class_type" ColumnName="clone_class_type" />
+                <ScalarProperty Name="analyzer_id" ColumnName="analyzer_id" />
+                <ScalarProperty Name="source_id" ColumnName="source_id" />
+                <ScalarProperty Name="clone_fragments_count" ColumnName="clone_fragments_count" />
+                <ScalarProperty Name="clone_lines_count" ColumnName="clone_lines_count" />
+                <ScalarProperty Name="cloneclass_id" ColumnName="cloneclass_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="clone_fragment">
+            <EntityTypeMapping TypeName="cycloneModel.clone_fragment">
+              <MappingFragment StoreEntitySet="clone_fragment">
+                <ScalarProperty Name="analyzer_id" ColumnName="analyzer_id" />
+                <ScalarProperty Name="source_file_id" ColumnName="source_file_id" />
+                <ScalarProperty Name="clone_class_id" ColumnName="clone_class_id" />
+                <ScalarProperty Name="clone_lines_count" ColumnName="clone_lines_count" />
+                <ScalarProperty Name="end_line" ColumnName="end_line" />
+                <ScalarProperty Name="start_line" ColumnName="start_line" />
+                <ScalarProperty Name="source_path" ColumnName="source_path" />
+                <ScalarProperty Name="clone_fragment_id" ColumnName="clone_fragment_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="clones_modified_users">
+            <EntityTypeMapping TypeName="cycloneModel.clones_modified_users">
+              <MappingFragment StoreEntitySet="clones_modified_users">
+                <ScalarProperty Name="modified_line_number" ColumnName="modified_line_number" />
+                <ScalarProperty Name="file_name" ColumnName="file_name" />
+                <ScalarProperty Name="timestamp" ColumnName="timestamp" />
+                <ScalarProperty Name="user_name" ColumnName="user_name" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="source_id" ColumnName="source_id" />
+                <ScalarProperty Name="analyzer_id" ColumnName="analyzer_id" />
+                <ScalarProperty Name="modification_id" ColumnName="modification_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sources">
+            <EntityTypeMapping TypeName="cycloneModel.source">
+              <MappingFragment StoreEntitySet="source">
+                <ScalarProperty Name="time_intervals_id" ColumnName="time_intervals_id" />
+                <ScalarProperty Name="git_url" ColumnName="git_url" />
+                <ScalarProperty Name="location" ColumnName="location" />
+                <ScalarProperty Name="create_date" ColumnName="create_date" />
+                <ScalarProperty Name="source_name" ColumnName="source_name" />
+                <ScalarProperty Name="source_id" ColumnName="source_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="source_analyzer">
+            <EntityTypeMapping TypeName="cycloneModel.source_analyzer">
+              <MappingFragment StoreEntitySet="source_analyzer">
+                <ScalarProperty Name="source_path" ColumnName="source_path" />
+                <ScalarProperty Name="line_of_code_count" ColumnName="line_of_code_count" />
+                <ScalarProperty Name="source_id" ColumnName="source_id" />
+                <ScalarProperty Name="clones_count" ColumnName="clones_count" />
+                <ScalarProperty Name="clone_classes_count" ColumnName="clone_classes_count" />
+                <ScalarProperty Name="source_file_count" ColumnName="source_file_count" />
+                <ScalarProperty Name="processed_time" ColumnName="processed_time" />
+                <ScalarProperty Name="analyzer_id" ColumnName="analyzer_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="source_file">
+            <EntityTypeMapping TypeName="cycloneModel.source_file">
+              <MappingFragment StoreEntitySet="source_file">
+                <ScalarProperty Name="analyzer_id" ColumnName="analyzer_id" />
+                <ScalarProperty Name="source_id" ColumnName="source_id" />
+                <ScalarProperty Name="line_of_code" ColumnName="line_of_code" />
+                <ScalarProperty Name="file_path" ColumnName="file_path" />
+                <ScalarProperty Name="file_id" ColumnName="file_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="time_intervals">
+            <EntityTypeMapping TypeName="cycloneModel.time_intervals">
+              <MappingFragment StoreEntitySet="time_intervals">
+                <ScalarProperty Name="display_value" ColumnName="display_value" />
+                <ScalarProperty Name="hours_value" ColumnName="hours_value" />
+                <ScalarProperty Name="time_intervals_id" ColumnName="time_intervals_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="webhooks">
+            <EntityTypeMapping TypeName="cycloneModel.webhook">
+              <MappingFragment StoreEntitySet="webhook">
+                <ScalarProperty Name="unique_id" ColumnName="unique_id" />
+                <ScalarProperty Name="source_id" ColumnName="source_id" />
+                <ScalarProperty Name="before_id" ColumnName="before_id" />
+                <ScalarProperty Name="after_id" ColumnName="after_id" />
+                <ScalarProperty Name="entry_time" ColumnName="entry_time" />
+                <ScalarProperty Name="repository_url" ColumnName="repository_url" />
+                <ScalarProperty Name="repository_id" ColumnName="repository_id" />
+                <ScalarProperty Name="head_commit_modified" ColumnName="head_commit_modified" />
+                <ScalarProperty Name="head_commit_removed" ColumnName="head_commit_removed" />
+                <ScalarProperty Name="head_commit_added" ColumnName="head_commit_added" />
+                <ScalarProperty Name="head_commit_message" ColumnName="head_commit_message" />
+                <ScalarProperty Name="head_commit_url" ColumnName="head_commit_url" />
+                <ScalarProperty Name="head_commit_id" ColumnName="head_commit_id" />
+                <ScalarProperty Name="webhook_ref_id" ColumnName="webhook_ref_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="webhook_commits">
+            <EntityTypeMapping TypeName="cycloneModel.webhook_commits">
+              <MappingFragment StoreEntitySet="webhook_commits">
+                <ScalarProperty Name="unique_id" ColumnName="unique_id" />
+                <ScalarProperty Name="modified" ColumnName="modified" />
+                <ScalarProperty Name="removed" ColumnName="removed" />
+                <ScalarProperty Name="added" ColumnName="added" />
+                <ScalarProperty Name="committer_user_name" ColumnName="committer_user_name" />
+                <ScalarProperty Name="committer_name" ColumnName="committer_name" />
+                <ScalarProperty Name="author_user_name" ColumnName="author_user_name" />
+                <ScalarProperty Name="author_name" ColumnName="author_name" />
+                <ScalarProperty Name="url" ColumnName="url" />
+                <ScalarProperty Name="timestamp" ColumnName="timestamp" />
+                <ScalarProperty Name="message" ColumnName="message" />
+                <ScalarProperty Name="git_commit_id" ColumnName="git_commit_id" />
+                <ScalarProperty Name="webhook_ref_id" ColumnName="webhook_ref_id" />
+                <ScalarProperty Name="icommit_id" ColumnName="icommit_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="webhook_files">
+            <EntityTypeMapping TypeName="cycloneModel.webhook_files">
+              <MappingFragment StoreEntitySet="webhook_files">
+                <ScalarProperty Name="unique_id" ColumnName="unique_id" />
+                <ScalarProperty Name="patch" ColumnName="patch" />
+                <ScalarProperty Name="changes" ColumnName="changes" />
+                <ScalarProperty Name="deletions" ColumnName="deletions" />
+                <ScalarProperty Name="additions" ColumnName="additions" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="file_name" ColumnName="file_name" />
+                <ScalarProperty Name="webhook_ref_id" ColumnName="webhook_ref_id" />
+                <ScalarProperty Name="file_id" ColumnName="file_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="False" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
